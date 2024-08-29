@@ -12,11 +12,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "clean": "where rimraf && rimraf ./dist",
+    "clean": "(node test_prod.js || exit 0) && rimraf ./dist",
     "prebuild": "npm run clean",
     "prepare": "npm run test",
     "pretest": "npm run build",
-    "test": "(node test_prod.js && jest && npm run test:bin:json && npm run test:bin:yaml) || exit 0",
+    "test": "(node test_prod.js || exit 0) && jest && npm run test:bin:json && npm run test:bin:yaml",
     "test:bin:json": "./bin/json-merger.js ./__tests__/bin.json",
     "test:bin:yaml": "./bin/json-merger.js -op @ ./__tests__/bin.yaml",
     "watch": "tsc --watch",
